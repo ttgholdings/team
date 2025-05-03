@@ -1,0 +1,134 @@
+version: 1.1.5
+cache: true
+endpoints:
+  anthropic:
+    streamRate: 35
+  custom:
+    # MoA
+    - name: "MoA"
+      apiKey: "MoA"
+      baseURL: "https://moa-xhck.onrender.com/v1/"
+      models:
+        default: ["gpt-4o"]
+      titleConvo: false
+      forcePrompt: true
+      modelDisplayLabel: "MoA"
+      dropParams: ["stream"]
+    - name: "HuggingFace"
+      apiKey: "${HF_API_KEY}"
+      baseURL: "https://m6b1pgx2m76ks4yc.us-east-1.aws.endpoints.huggingface.cloud/v1"
+      models:
+        default: ["/repository"]
+        fetch: true
+      modelDisplayLabel: "HuggingFace"
+      titleModel: "current_model"
+    - name: "Perplexity"
+      apiKey: "${PERPLEXITY_API_KEY}"
+      baseURL: "https://api.perplexity.ai/"
+      models:
+        default:
+          - "llama-3.1-sonar-small-128k-online"
+          - "llama-3.1-sonar-large-128k-online"
+          - "llama-3.1-sonar-huge-128k-online"
+        fetch: false
+      titleConvo: true
+      titleModel: "current_model"
+      forcePrompt: false
+      modelDisplayLabel: "Perplexity"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+    - name: "OpenRouter"
+      apiKey: "${OPENROUTER_KEY}" # NOT OPENROUTER_API_KEY
+      baseURL: "https://openrouter.ai/api/v1"
+      titleConvo: true
+      titleModel: "gpt-4o-mini"
+      modelDisplayLabel: "OpenRouter"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+      models:
+        default:
+          - "gpt-4o-mini"
+        fetch: true
+    - name: "Codestral - Chat"
+      apiKey: "${CODESTRAL_API_KEY}"
+      baseURL: "https://codestral.mistral.ai/v1/chat/completions"
+      titleConvo: true
+      titleModel: "current_model"
+      modelDisplayLabel: "Codestral"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+      models:
+        default:
+          - "codestral-latest"
+        fetch: true
+    #- name: "Codestral - Completion"
+      #apiKey: "${CODESTRAL_COMPLETION_API_KEY}"
+      #baseURL: "https://codestral.mistral.ai/v1/fim/completions"
+      #titleConvo: true
+      #titleModel: "current_model"
+      #modelDisplayLabel: "Codestral"
+      #forcePrompt: true
+      #dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+      #models:
+       # default:
+        #  - "codestral-latest"
+        #fetch: true
+    # - name: "Deepseek"
+    #   apiKey: "${DEEPSEEK_API_KEY}"
+    #   baseURL: "https://api.deepseek.com/v1"
+    #   models:
+    #     default: ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"]
+    #     fetch: false
+    #   titleConvo: true
+    #   titleModel: "deepseek-chat"
+    #   summarize: false
+    #   summaryModel: "deepseek-chat"
+    #   forcePrompt: false
+    #   modelDisplayLabel: "Deepseek"
+    - name: "Mistral"
+      apiKey: "${MISTRAL_API_KEY}"
+      baseURL: "https://api.mistral.ai/v1"
+      models:
+        default: ["codestral-latest","mistral-tiny", "mistral-small", "mistral-medium", "mistral-large-latest"]
+        fetch: true
+      titleConvo: true
+      titleModel: "mistral-tiny"
+      modelDisplayLabel: "Mistral"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+
+speech:
+  tts:
+    openai:
+      voices: ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
+      apiKey: '${OPENAI_API_KEY}'
+      model: 'tts-1'
+  stt:
+    openai:
+      apiKey: '${OPENAI_API_KEY}'
+      model: 'whisper-1'
+
+interface:
+  privacyPolicy:
+    externalUrl: "https://example.com/privacy"
+    openNewTab: true
+  termsOfService:
+    externalUrl: "https://example.com/terms"
+    openNewTab: true
+    modalAcceptance: true
+    modalTitle: "Terms of Service"
+    modalContent: |
+      # Terms of Service
+      ## Introduction
+      Welcome to TTG AI
+
+### MCP Servers Configuration
+
+# MCP Servers Configuration
+# mcpServers:
+#   weather (identifier for me can be anything):
+#     type: sse (type is always sse online or running server to point to and stdio for local or running on same server, stick to sse for online servers)
+#     url: "https://weather-api-demo-x31r.onrender.com/weather (url is the url of the server to point to)
+
+
+# MCP Servers Configuration
+# mcpServers:
+#    firecrawl:
+#      #type: sse
+#      url: "https://mcp.composio.dev/firecrawl/lemon-clumsy-notebook-DIorYI"
